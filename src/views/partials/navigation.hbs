@@ -1,0 +1,33 @@
+<header class="p-3 navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a class="navbar-brand" href="/">Cripto</a>
+        
+        
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <!--
+          <li><a href="#" class="nav-link px-2 text-secondary">Inicio</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          -->
+        </ul>
+
+        <!--
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <input type="search" class="form-control form-control-dark" placeholder="Buscar..." aria-label="Buscar">
+        </form>
+        -->
+
+        <div class="text-end">
+          {{#if userName}}
+          <a class="btn btn-outline-light me-2" href="/users/logout">Cerrar sesion</a>
+          {{else}}
+          <a class="btn btn-success" href="/users/signin">Iniciar sesion</a>
+          <a class="btn btn-warning" href="/users/signup">Registrarse</a>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </header>

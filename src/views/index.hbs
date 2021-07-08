@@ -1,0 +1,65 @@
+<div class="container-fluid">
+    <table class="table table-sm table-striped">
+        <thead>
+            <tr class="strong">
+                <td>ID</td>
+                <td>Precio</td>
+                <td>% MA200</td>
+                <td class="table-success head_1m">1m<br>Precio</td>
+                <td class="table-success head_1m">1m BB<br>Estado</td>
+                <td class="table-success head_1m">1m BB<br>Cambio</td>
+                <td class="table-success head_1m">1m EMA<br>Estado</td>
+                <td class="table-success head_1m">1m EMA<br>Cambio</td>
+                <td class="table-warning head_5m">5m<br>Precio</td>
+                <td class="table-warning head_5m">5m BB<br>Estado</td>
+                <td class="table-warning head_5m">5m BB<br>Cambio</td>
+                <td class="table-warning head_5m">5m EMA<br>Estado</td>
+                <td class="table-warning head_5m">5m EMA<br>Cambio</td>
+                <td class="table-info head_15m">15m<br>Precio</td>
+                <td class="table-info head_15m">15m BB<br>Estado</td>
+                <td class="table-info head_15m">15m BB<br>Cambio</td>
+                <td class="table-info head_15m">15m EMA<br>Estado</td>
+                <td class="table-info head_15m">15m EMA<br>Cambio</td>
+                <td class="table-danger head_1h">1h<br>Precio</td>
+                <td class="table-danger head_1h">1h BB<br>Estado</td>
+                <td class="table-danger head_1h">1h BB<br>Cambio</td>
+                <td class="table-danger head_1h">1h EMA<br>Estado</td>
+                <td class="table-danger head_1h">1h EMA<br>Cambio</td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each tikers}}
+            <tr>
+                <td>{{_id}}</td>
+                <td>{{price}}</td>
+                <td>&nbsp;</td>
+                <td>{{perc_1m}}%</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>{{perc_5m}}%</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>{{perc_15m}}%</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>{{perc_1h}}</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>                
+            </tr>
+            {{else}}
+                <td class="text-warning" colspan="23">
+                    No se encontraron registros
+                </td>
+            {{/each}}
+            
+        </tbody >
+    </table>
+</div>
