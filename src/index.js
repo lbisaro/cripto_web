@@ -7,6 +7,10 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const morgan = require('morgan');
 
+const cron = require('node-cron');
+
+const MainCtrl = require("./controllers/MainCtrl").MainCtrl;
+
 
 //Initializations
 const app =  express();
@@ -60,8 +64,15 @@ app.use(require('./routes/notes'));
 app.use(express.static(path.join(__dirname,'public')));
 
 
+//Cron Jobs
+cron.schedule("55 * * * * *", () => {
+    let dt = new Date;
+    console.log(dt.toString());
+    MainCtrl.getPrices();
+});
 
 //Server is listening
 app.listen(app.get('port'), () => {
     console.log('Server running on port: ',app.get('port'));
 });
+
