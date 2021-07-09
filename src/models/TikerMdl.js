@@ -8,6 +8,7 @@ const TikerSchema = new Schema({
     updated: Number,
     price: Number,
     perc_1m: Number,
+    perc_3m: Number,
     perc_5m: Number,
     perc_15m: Number,
     perc_1h: Number,
