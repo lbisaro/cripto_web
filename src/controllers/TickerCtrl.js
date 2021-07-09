@@ -15,14 +15,20 @@ class TickerCtrl {
 
           //Update Tiker -------------------------------------------------------------------------
           if (tikerId.substr(-4)=='USDT' && tikerId.substr(-8)!='DOWNUSDT' && tikerId.substr(-6)!='UPUSDT' ) {
+            console.log('1',tikerId);
             let tiker = await Tiker.findById(tikerId);
+            console.log('2',tikerId);
             if (!tiker) 
             {
+              console.log('2');
               tiker = await new Tiker({_id: tikerId, 
                 created: dateToTicker
                });
+               console.log('3');
+
             }
             prices[tikerId] = Number(prices[tikerId]).toString(); //Quita los 0 de mas en los decimales
+            console.log('4');
 
             //Averiguando la cantidad de decimales de la moneda -------------------------------------------------------------------------
             var tikerDecs = (prices[tikerId].split('.')[1]?prices[tikerId].split('.')[1].length:1);
@@ -239,9 +245,9 @@ class TickerCtrl {
               tiker.perc_1h =  ( ( ( tiker.prices_1h[tiker.prices_1h.length-1].price   / tiker.prices_1h[tiker.prices_1h.length-2].price   ) -1 ) * 100 ).toFixed(2);
 
             //Precio actual respecto a la ma200
-            if (tiker.prices_1h[(tiker.prices_1h.length-1)].ind_ma200)
+            if (tiker.prices_1h.length>0 && tiker.prices_1h[(tiker.prices_1h.length-1)].ind_ma200)
               tiker.perc_price_vs_ma200 = ( ( ( tiker.prices_1h[(tiker.prices_1h.length-1)].ind_ma200   / tiker.price   ) -1 ) * 100 ).toFixed(2);
-            
+ 
             await tiker.save();    
             q++;      
           }
