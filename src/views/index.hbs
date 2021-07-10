@@ -4,7 +4,7 @@
         <thead>
             <tr class="strong">
                 <td>ID</td>
-                <td>Precio actual</td>
+                 <td>Ultimos 15m</td>
                 <td>% 1m</td>
                 <td>% 3m</td>
                 <td>% 5m</td>
@@ -14,15 +14,17 @@
         </thead>
         <tbody>
             {{#each tikers}}
-            <tr>
-                <td>{{_id}}</td>
-                <td>{{price}}</td>
-                <td>{{perc_1m}}</td>
-                <td>{{perc_3m}}</td>
-                <td>{{perc_5m}}</td>
-                <td>{{perc_15m}}</td>
-                <td>{{perc_1h}}</td>
-            </tr>
+                {{#if name}}
+                    <tr>
+                        <td>{{name}} (USD {{price}})</td>
+                        <td>{{sumLast15m}}</td>
+                        <td>{{perc_1m}}</td>
+                        <td>{{perc_3m}}</td>
+                        <td>{{perc_5m}}</td>
+                        <td>{{perc_15m}}</td>
+                        <td>{{perc_1h}}</td>
+                    </tr>
+                {{/if}}
             {{else}}
                 <td class="text-warning" colspan="23">
                     No se encontraron registros
