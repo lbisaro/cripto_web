@@ -1,3 +1,4 @@
+const moment = require('moment');
 const express = require('express');
 const router = express.Router();
 
@@ -5,8 +6,11 @@ const Tiker = require('../models/TikerMdl');
 
 router.get('/', async (req,res) => {
     const tikersToSend = [];
+    let lastUpdate = '';
     const tikers = await Tiker.find().sort({perc_1m: "desc"}).lean()
     for (let i=0; i<tikers.length; i++) {
+        if (tikers[i].updated>lastUpdate)
+            lastUpdate = tikers[i].updated;
         if (tikers[i].perc_1m > 0 && tikers[i].perc_5m > 0 && tikers[i].perc_15m > 0)
         {
             tikers[i].name = tikers[i]._id.replace('USDT','');
@@ -24,8 +28,10 @@ router.get('/', async (req,res) => {
             }
             tikers[i].sumLast15m = sumLast15m.toFixed(2);
         }
-     };
-    res.render('index',{tikers});
+    };
+    lastUpdate = lastUpdate.toString();
+    lastUpdate = lastUpdate.substr(6,2)+'-'+lastUpdate.substr(4,2)+'-'+lastUpdate.substr(0,4)+' '+lastUpdate.substr(8,2)+':'+lastUpdate.substr(10,2)
+    res.render('index',{tikers,lastUpdate});
 });
 
 
