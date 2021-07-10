@@ -6,7 +6,7 @@
         <div >Actualizado: {{lastUpdate}}</div>  
     </div>
             
-    <table class="table table-sm table-striped">
+    <table class="table table-sm table-striped" id="tbl_precios">
         <thead>
             <tr class="strong">
                 <td>ID</td>
@@ -40,3 +40,8 @@
         </tbody >
     </table>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#tbl_precios').tablesorter({ sortList: [[1,1]] });
+    });
+</script>
