@@ -8,9 +8,11 @@ table.tablesorter thead tr .tablesorter-header-inner {
 }
 
 table.tablesorter thead tr .tablesorter-headerAsc .tablesorter-header-inner{
+	padding: 0 16px 0 0;
 	background-image: url(../images/jquery.tablesorter/asc.gif);
 }
 table.tablesorter thead tr .tablesorter-headerDesc .tablesorter-header-inner{
+	padding: 0 16px 0 0;
 	background-image: url(../images/jquery.tablesorter/desc.gif);
 }
 table.tablesorter thead tr .tablesorter-headerAsc {
