@@ -10,25 +10,25 @@
         <thead>
             <tr class="strong">
                 <td>ID</td>
-                 <td>Ultimos 15m</td>
-                <td>% 1m</td>
-                <td>% 3m</td>
-                <td>% 5m</td>
-                <td>% 15m</td>
-                <td>% 1h</td>
+                <td class="text-end">Ultimos 15m</td>
+                <td class="text-end">% 1m</td>
+                <td class="text-end">% 3m</td>
+                <td class="text-end">% 5m</td>
+                <td class="text-end">% 15m</td>
+                <td class="text-end">% 1h</td>
             </tr>
         </thead>
         <tbody>
             {{#each tikers}}
                 {{#if name}}
                     <tr>
-                        <td>{{name}} (USD {{price}})</td>
-                        <td>{{sumLast15m}}</td>
-                        <td>{{perc_1m}}</td>
-                        <td>{{perc_3m}}</td>
-                        <td>{{perc_5m}}</td>
-                        <td>{{perc_15m}}</td>
-                        <td>{{perc_1h}}</td>
+                        <td><a href="https://www.binance.com/es/trade/{{name}}_USDT?type=spot" target="_blank">{{name}}</a> (USD {{price}})</td>
+                        <td class="text-end">{{sumLast15m}}</td>
+                        <td class="text-end">{{perc_1m}}</td>
+                        <td class="text-end">{{perc_3m}}</td>
+                        <td class="text-end">{{perc_5m}}</td>
+                        <td class="text-end">{{perc_15m}}</td>
+                        <td class="text-end">{{perc_1h}}</td>
                     </tr>
                 {{/if}}
             {{else}}

@@ -1,0 +1,21 @@
+/* tables */
+
+table.tablesorter thead tr .tablesorter-header-inner {
+	background-image: url(../images/jquery.tablesorter/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+table.tablesorter thead tr .tablesorter-headerAsc .tablesorter-header-inner{
+	background-image: url(../images/jquery.tablesorter/asc.gif);
+}
+table.tablesorter thead tr .tablesorter-headerDesc .tablesorter-header-inner{
+	background-image: url(../images/jquery.tablesorter/desc.gif);
+}
+table.tablesorter thead tr .tablesorter-headerAsc {
+	background-color: #ddd;
+}
+table.tablesorter thead tr .tablesorter-headerDesc {
+	background-color: #ddd;
+}
