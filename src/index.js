@@ -7,6 +7,8 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const morgan = require('morgan');
 
+global.tickerModel = path.join(__dirname,'..','..','cripto_cronjobs','models','TikerMdl');
+
 //Initializations
 const app =  express();
 require('./database');
