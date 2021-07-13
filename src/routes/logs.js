@@ -13,6 +13,7 @@ router.get('/logs', async (req,res) => {
                             start: moment(logs[i]._id+' '+logs[i].daily[j].start).format('HH:mm:ss'),
                             end: moment(logs[i]._id+' '+logs[i].daily[j].end).format('HH:mm:ss'),
                             diffLast: logs[i].daily[j].diffLast,
+                            memory: logs[i].daily[j].memory,
                             tickersUpdated: logs[i].daily[j].tickersUpdated
                     });
             
