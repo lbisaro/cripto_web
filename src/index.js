@@ -6,9 +6,12 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const morgan = require('morgan');
+const SocketIO = require('socket.io');
 
 //Initializations
 const app =  express();
+
+
 require('./database');
 require('./config/passport');
 
@@ -60,7 +63,35 @@ app.use(require('./routes/logs'));
 app.use(express.static(path.join(__dirname,'public')));
 
 //Server is listening
-app.listen(app.get('port'), () => {
+const server = app.listen(app.get('port'), () => {
     console.log('Server running on port: ',app.get('port'));
 });
+const io = SocketIO(server);
 
+var dato = {id: '12345',
+            }
+
+//WebSockets
+io.on('connection', (socket) => {
+    console.log('New Connection!',socket.id);
+
+    setInterval(function() {
+        let time = new Date();
+        socket.emit('lastupdate', {
+           time: time
+        });
+        
+    },1000);
+
+    /*
+        socket.on('MENSAJE-RECIBIDO', function(data) {
+            //broadcast.emit() -> esto emite un mensaje a todos, menos a quien lo envio.
+            socket.broadcast.emit('MENSAJE-A-ENVIAR', { 
+                id: '12345',
+                name: 'Pedro'
+            }); 
+        }
+        
+        
+    */
+});

@@ -3,6 +3,7 @@
         <div >
             <h3>Variacion del precio</h3>
         </div>
+        <div >Mensaje: <span id="last_update">Waiting....</span></div> 
         <div >Actualizado: {{lastUpdate}}</div>  
     </div>
             
@@ -43,5 +44,13 @@
 <script>
     $(document).ready(function() {
         $('#tbl_precios').tablesorter({ sortList: [[1,1]] });
+    });
+
+    //web sockets
+    const socket = io();
+    socket.on('lastupdate', function (data) {
+       $('#last_update').html(
+           `Actualizado: <strong>${data.time}</strong> ok`
+        ); 
     });
 </script>
