@@ -2,12 +2,12 @@ const moment = require('moment');
 const express = require('express');
 const router = express.Router();
 
-const Tiker = require('../models/TikerMdl');
+const Ticker = require('../models/TickerMdl');
 
 router.get('/', async (req,res) => {
     const tickersToSend = [];
     let lastUpdate = '';
-    const tickers = await Tiker.find().sort({perc_1m: "desc"}).lean()
+    const tickers = await Ticker.find().sort({perc_1m: "desc"}).lean()
     for (let i=0; i<tickers.length; i++) {
         if (tickers[i].updated>lastUpdate)
             lastUpdate = tickers[i].updated;

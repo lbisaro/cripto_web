@@ -2,7 +2,7 @@ var moment = require('moment');
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const TikerSchema = new Schema({
+const TickerSchema = new Schema({
     _id: String,
     created: Number,
     updated: Number,
@@ -52,10 +52,10 @@ const TikerSchema = new Schema({
                 }],
 });
 
-TikerSchema.statics.getTickerDateTime = function() { 
+TickerSchema.statics.getTickerDateTime = function() { 
     //Definiendo el ID (Relacionado al momento en que se obtienen los precios)
     const dateToIdForPrice = moment().format('YYYYMMDDHHmm');
     return dateToIdForPrice; 
 };
 
-module.exports = mongoose.model('Tiker',TikerSchema);
+module.exports = mongoose.model('Ticker',TickerSchema);

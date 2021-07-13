@@ -1,0 +1,37 @@
+<div class="container-fluid" id="variacion_del_precio">
+    <div class="d-flex justify-content-between">
+        <div >
+            <h3>Logs</h3>
+        </div>
+        {{!-- <div >Actualizado: {{lastUpdate}}</div>   --}}
+    </div>
+            
+    <table class="table table-sm table-striped" id="tbl_precios">
+        <thead>
+            <tr class="strong">
+                <td>Fecha</td>
+                <td>Inicio</td>
+                <td>Fin</td>
+                <td>Control</td>
+                <td class="text-end">Tickers Updated</td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+                <tr>
+                    <td>{{dt}}</td>
+                    <td>{{start}}</td>
+                    <td>{{end}}</td>
+                    <td>{{diffLast}}</td>
+                    <td class="text-end">{{tickersUpdated}}</td>
+                </tr>
+            
+            {{else}}
+                <td class="text-warning" colspan="4">
+                    No se encontraron registros
+                </td>
+            {{/each}}
+            
+        </tbody >
+    </table>
+</div>

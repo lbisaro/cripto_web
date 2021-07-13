@@ -7,8 +7,6 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const morgan = require('morgan');
 
-global.tickerModel = path.join(__dirname,'..','..','cripto_cronjobs','models','TikerMdl');
-
 //Initializations
 const app =  express();
 require('./database');
@@ -56,6 +54,7 @@ app.use((req,res,next) => {
 app.use(require('./routes/index'));
 app.use(require('./routes/users'));
 app.use(require('./routes/notes'));
+app.use(require('./routes/logs'));
 
 //Static Files
 app.use(express.static(path.join(__dirname,'public')));
