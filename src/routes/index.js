@@ -11,7 +11,7 @@ router.get('/', async (req,res) => {
     for (let i=0; i<tickers.length; i++) {
         if (tickers[i].updated>lastUpdate)
             lastUpdate = tickers[i].updated;
-        if (tickers[i].perc_1m > 0 && tickers[i].perc_5m > 0 && tickers[i].perc_15m > 0)
+        if (tickers[i].perc_1m > 0 || tickers[i].perc_5m > 0 || tickers[i].perc_15m > 0 || tickers[i].perc_1h > 0)
         {
             tickers[i].name = tickers[i]._id.replace('USDT','');
 
