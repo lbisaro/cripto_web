@@ -76,8 +76,12 @@ var dato = {id: '12345',
 
 //WebSockets
 var basket_reservation = io.on('connection', (socket) => {
-    console.log('New Connection!',socket.id);
-/*
+    //console.log('New Connection!',socket.id);
+
+    socket.on('getPrices', function(data) {
+        sendMessage('updatePrices'); 
+    });
+    /*
     setInterval(function() {
         let time = new Date();
         socket.emit('lastupdate', {
@@ -85,21 +89,8 @@ var basket_reservation = io.on('connection', (socket) => {
         });
         
     },1000);
-*/
-        
-    
-
-    /*
-        socket.on('MENSAJE-RECIBIDO', function(data) {
-            //broadcast.emit() -> esto emite un mensaje a todos, menos a quien lo envio.
-            socket.broadcast.emit('MENSAJE-A-ENVIAR', { 
-                id: '12345',
-                name: 'Pedro'
-            }); 
-        }
-        
-        
-    */
+    */   
+       
 });
 
 // Helper to send message (it uses closure to keep a reference to the io connetion - which is stored in basket_reservation in your code)

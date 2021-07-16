@@ -6,7 +6,7 @@
         <div id="last_update" class="text-success"></div>  
     </div>
             
-    <table class="table table-sm table-striped" id="tbl_precios">
+    <table class="table table-sm table-dark table-striped" id="tbl_precios">
         <thead>
             <tr class="strong">
                 <td>ID</td>
@@ -19,34 +19,22 @@
             </tr>
         </thead>
         <tbody>
-            {{#each tickers}}
-                {{#if name}}
-                    <tr>
-                        <td><a href="https://www.binance.com/es/trade/{{name}}_USDT?type=spot" target="_blank">{{name}}</a> <span class="fst-italic" style="font-size:x-small">(USD {{price}})</span></td>
-                        <td class="text-end">{{sumLast15m}}</td>
-                        <td class="text-end">{{perc_1m}}</td>
-                        <td class="text-end">{{perc_3m}}</td>
-                        <td class="text-end">{{perc_5m}}</td>
-                        <td class="text-end">{{perc_15m}}</td>
-                        <td class="text-end">{{perc_1h}}</td>
-                    </tr>
-                {{/if}}
-            {{else}}
-                <td class="text-warning" colspan="23">
-                    No se encontraron registros
-                </td>
-            {{/each}}
+            
+            <!-- La tabla se completa con info provista por websocket -->
             
         </tbody >
     </table>
 </div>
 <script>
-    $(document).ready(function() {
-        $('#tbl_precios').tablesorter({ sortList: [[1,1]] });
-    });
-
+    
     //web sockets
     const socket = io();
+    
+    $(document).ready(function() {
+        $('#tbl_precios').tablesorter({ sortList: [[1,1]] });
+        socket.emit('getPrices');
+    });
+
     socket.on('lastupdate', function (data) {
        $('#last_update').html(data.time); 
     });

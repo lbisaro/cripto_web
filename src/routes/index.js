@@ -5,9 +5,7 @@ const router = express.Router();
 const Ticker = require('../models/TickerMdl');
 
 router.get('/', async (req,res) => {
-    let lastUpdate = '';
-    const tickerPrices = await Ticker.getPrices();
-    res.render('index',tickerPrices);
+    res.render('index',{});
 });
 
 module.exports = router;

@@ -16,8 +16,8 @@ table.tablesorter thead tr .tablesorter-headerDesc .tablesorter-header-inner{
 	background-image: url(../images/jquery.tablesorter/desc.gif);
 }
 table.tablesorter thead tr .tablesorter-headerAsc {
-	background-color: #ddd;
+	background-color: #474747;
 }
 table.tablesorter thead tr .tablesorter-headerDesc {
-	background-color: #ddd;
+	background-color: #474747;
 }
