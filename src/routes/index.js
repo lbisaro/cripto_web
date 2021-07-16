@@ -20,10 +20,8 @@ router.get('/', async (req,res) => {
             let sumLast15m = 0;
             if (tickers[i].prices_1m.length>16){
                 for (let j=(tickers[i].prices_1m.length-15); j<tickers[i].prices_1m.length;j++){
-                    perc = ((tickers[i].prices_1m[j-1].price / tickers[i].prices_1m[j].price)-1)*100;
+                    perc = ((tickers[i].prices_1m[j].price / tickers[i].prices_1m[j-1].price)-1)*100;
                     sumLast15m += perc;
-                    
-
                 }
             }
             tickers[i].sumLast15m = sumLast15m.toFixed(2);
@@ -33,6 +31,5 @@ router.get('/', async (req,res) => {
     lastUpdate = lastUpdate.substr(6,2)+'-'+lastUpdate.substr(4,2)+'-'+lastUpdate.substr(0,4)+' '+lastUpdate.substr(8,2)+':'+lastUpdate.substr(10,2)
     res.render('index',{tickers,lastUpdate});
 });
-
 
 module.exports = router;

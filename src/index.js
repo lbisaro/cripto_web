@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const morgan = require('morgan');
 const SocketIO = require('socket.io');
+const moment = require('moment');
 
 //Initializations
 const app =  express();
@@ -71,10 +72,12 @@ const io = SocketIO(server);
 var dato = {id: '12345',
             }
 
-//WebSockets
-io.on('connection', (socket) => {
-    console.log('New Connection!',socket.id);
+ 
 
+//WebSockets
+var basket_reservation = io.on('connection', (socket) => {
+    console.log('New Connection!',socket.id);
+/*
     setInterval(function() {
         let time = new Date();
         socket.emit('lastupdate', {
@@ -82,6 +85,9 @@ io.on('connection', (socket) => {
         });
         
     },1000);
+*/
+        
+    
 
     /*
         socket.on('MENSAJE-RECIBIDO', function(data) {
@@ -94,4 +100,18 @@ io.on('connection', (socket) => {
         
         
     */
+});
+
+// Helper to send message (it uses closure to keep a reference to the io connetion - which is stored in basket_reservation in your code)
+var sendMessage = function (msg) {
+    if (basket_reservation) {
+      let time = moment().format('DD/MM/YY HH:mm');
+      basket_reservation.emit('lastupdate', {
+        time: time
+        });
+    }
+  };
+
+app.get('/dbUpdated', function(req,res){
+    sendMessage('lastupdate');
 });

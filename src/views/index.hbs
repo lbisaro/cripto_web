@@ -3,8 +3,7 @@
         <div >
             <h3>Variacion del precio</h3>
         </div>
-        <div >Mensaje: <span id="last_update">Waiting....</span></div> 
-        <div >Actualizado: {{lastUpdate}}</div>  
+        <div class="text-seccondary">Actualizado: <strong id="last_update">Waiting....</strong></div>  
     </div>
             
     <table class="table table-sm table-striped" id="tbl_precios">
@@ -49,8 +48,6 @@
     //web sockets
     const socket = io();
     socket.on('lastupdate', function (data) {
-       $('#last_update').html(
-           `Actualizado: <strong>${data.time}</strong> ok`
-        ); 
+       $('#last_update').html(data.time); 
     });
 </script>
