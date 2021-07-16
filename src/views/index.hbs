@@ -65,17 +65,17 @@
                                 (USD ${data.tickers[i].price})
                             </span>
                         </td> ${(data.tickers[i].perc_1m<0?'text-danger':'text-success')}
-                        <td class="text-end ${(data.tickers[i].sumLast15m>0?'text-success':'text-danget')}">
+                        <td class="text-end ${(data.tickers[i].sumLast15m>0?'text-success':'text-danger')}">
                             ${data.tickers[i].sumLast15m}</td>
-                        <td class="text-end ${(data.tickers[i].perc_1m>0?'text-success':'text-danget')}">
+                        <td class="text-end ${(data.tickers[i].perc_1m>0?'text-success':'text-danger')}">
                             ${data.tickers[i].perc_1m}</td>
-                        <td class="text-end ${(data.tickers[i].perc_3m>0?'text-success':'text-danget')}">
+                        <td class="text-end ${(data.tickers[i].perc_3m>0?'text-success':'text-danger')}">
                             ${data.tickers[i].perc_3m}</td>
-                        <td class="text-end ${(data.tickers[i].perc_5m>0?'text-success':'text-danget')}">
+                        <td class="text-end ${(data.tickers[i].perc_5m>0?'text-success':'text-danger')}">
                             ${data.tickers[i].perc_5m}</td>
-                        <td class="text-end ${(data.tickers[i].perc_15m>0?'text-success':'text-danget')}">
+                        <td class="text-end ${(data.tickers[i].perc_15m>0?'text-success':'text-danger')}">
                             ${data.tickers[i].perc_15m}</td>
-                        <td class="text-end ${(data.tickers[i].perc_1h>0?'text-success':'text-danget')}">
+                        <td class="text-end ${(data.tickers[i].perc_1h>0?'text-success':'text-danger')}">
                             ${data.tickers[i].perc_1h}</td>
                     </tr>`);
             }
