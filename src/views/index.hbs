@@ -3,7 +3,7 @@
         <div >
             <h3>Variacion del precio</h3>
         </div>
-        <div class="text-seccondary">Actualizado: <strong id="last_update">Waiting....</strong></div>  
+        <div id="last_update" class="text-success"></div>  
     </div>
             
     <table class="table table-sm table-striped" id="tbl_precios">
@@ -49,5 +49,41 @@
     const socket = io();
     socket.on('lastupdate', function (data) {
        $('#last_update').html(data.time); 
+    });
+
+    socket.on('updatePrices', function (data) {
+        var tbody = $('#tbl_precios tbody');
+        tbody.html('');
+        $('#last_update').html(`Actualizado: <strong>${data.lastUpdate}</strong>`);
+        if (data.tickers.length>0) {
+            for (var i=0; i<data.tickers.length;i++){
+                tbody.append(`
+                    <tr>
+                        <td><a href="https://www.binance.com/es/trade/${data.tickers[i].name}_USDT?type=spot" target="_blank">
+                            ${data.tickers[i].name}</a> 
+                            <span class="fst-italic" style="font-size:x-small">
+                                (USD ${data.tickers[i].price})
+                            </span>
+                        </td> ${(data.tickers[i].perc_1m<0?'text-danger':'text-success')}
+                        <td class="text-end ${(data.tickers[i].sumLast15m>0?'text-success':'text-danget')}">
+                            ${data.tickers[i].sumLast15m}</td>
+                        <td class="text-end ${(data.tickers[i].perc_1m>0?'text-success':'text-danget')}">
+                            ${data.tickers[i].perc_1m}</td>
+                        <td class="text-end ${(data.tickers[i].perc_3m>0?'text-success':'text-danget')}">
+                            ${data.tickers[i].perc_3m}</td>
+                        <td class="text-end ${(data.tickers[i].perc_5m>0?'text-success':'text-danget')}">
+                            ${data.tickers[i].perc_5m}</td>
+                        <td class="text-end ${(data.tickers[i].perc_15m>0?'text-success':'text-danget')}">
+                            ${data.tickers[i].perc_15m}</td>
+                        <td class="text-end ${(data.tickers[i].perc_1h>0?'text-success':'text-danget')}">
+                            ${data.tickers[i].perc_1h}</td>
+                    </tr>`);
+            }
+        }
+        else
+        {
+            $('#tbl_precios tbody').html('<tr><td colspan="7"><div class="alert alert-warning" role="alert">No hay registros disponibles.</div></td></tr>');
+        }
+        $("#tbl_precios").trigger("update");
     });
 </script>

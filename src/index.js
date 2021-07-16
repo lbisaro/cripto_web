@@ -103,15 +103,25 @@ var basket_reservation = io.on('connection', (socket) => {
 });
 
 // Helper to send message (it uses closure to keep a reference to the io connetion - which is stored in basket_reservation in your code)
-var sendMessage = function (msg) {
+const Ticker = require('./models/TickerMdl');
+
+var sendMessage = async function (msg) {
     if (basket_reservation) {
-      let time = moment().format('DD/MM/YY HH:mm');
-      basket_reservation.emit('lastupdate', {
-        time: time
-        });
+    
+        if (msg=='updatePrices')
+        {
+            const tickers = await Ticker.getPrices();
+            console.log('Enviando...');
+            basket_reservation.emit('updatePrices', {
+                lastUpdate: tickers.lastUpdate,
+                tickers: tickers.tickers
+                }
+            );
+
+        }
     }
   };
 
 app.get('/dbUpdated', function(req,res){
-    sendMessage('lastupdate');
+    sendMessage('updatePrices');
 });
