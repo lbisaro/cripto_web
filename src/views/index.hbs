@@ -35,9 +35,9 @@
         socket.emit('getPrices');
     });
 
-    socket.on('lastupdate', function (data) {
-       $('#last_update').html(data.time); 
-    });
+    setInterval(function () {
+        socket.emit('getPrices');
+    },60000);
 
     socket.on('updatePrices', function (data) {
         var tbody = $('#tbl_precios tbody');
