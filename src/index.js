@@ -69,10 +69,6 @@ const server = app.listen(app.get('port'), () => {
 });
 const io = SocketIO(server);
 
-var dato = {id: '12345',
-            }
-
- 
 
 //WebSockets
 var basket_reservation = io.on('connection', (socket) => {
@@ -80,6 +76,10 @@ var basket_reservation = io.on('connection', (socket) => {
 
     socket.on('getPrices', function(data) {
         sendMessage('updatePrices'); 
+    });
+
+    socket.on('getTickerPrices', function(data) {
+        sendMessage('updateTickerPrices',data); 
     });
     /*
     setInterval(function() {
@@ -96,13 +96,12 @@ var basket_reservation = io.on('connection', (socket) => {
 // Helper to send message (it uses closure to keep a reference to the io connetion - which is stored in basket_reservation in your code)
 const Ticker = require('./models/TickerMdl');
 
-var sendMessage = async function (msg) {
+var sendMessage = async function (msg,data) {
     if (basket_reservation) {
     
         if (msg=='updatePrices')
         {
             const tickers = await Ticker.getPrices();
-            console.log('Enviando...');
             basket_reservation.emit('updatePrices', {
                 lastUpdate: tickers.lastUpdate,
                 tickers: tickers.tickers
@@ -110,9 +109,16 @@ var sendMessage = async function (msg) {
             );
 
         }
+        else if (msg=='updateTickerPrices')
+        {
+            const tickers = await Ticker.getTickerPrices('BTCUSDT','1m');
+            basket_reservation.emit('updateTickerPrices', {tickers});
+        }
+
+        
     }
   };
 
 app.get('/dbUpdated', function(req,res){
-    sendMessage('updatePrices');
+    sendMessage('updatePrices',req);
 });

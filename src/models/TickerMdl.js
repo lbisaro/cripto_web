@@ -35,4 +35,38 @@ TickerSchema.statics.getPrices = async function () {
     return {tickers,lastUpdate};
 };
 
+/**
+ * 
+ * @param {*} tickerId: BTCUSDT, ETHUSDT, etc.....
+ * @param {*} period: 1m, 5m, 15m, 1h
+ * @returns 
+ */
+
+TickerSchema.statics.getTickerPrices = async function (tickerId, period) {
+    if (period!='1m' && period!='5m' && period!='15m' && period!='1h')
+        period = '1m';
+
+    const ticker = await this.findOne({_id: tickerId}).lean();
+    
+    let prices = []; 
+    if (period == '1m')
+        prices = ticker.prices_1m;
+    else if (period == '5m')
+        prices = ticker.prices_5m;
+    else if (period == '15m')
+        prices = ticker.prices_15m;
+    else if (period == '1h')
+        prices = ticker.prices_1h;
+
+    let data = [];
+    let date;
+    for (let i=0; i<prices.length; i++) {
+        date = new Date(moment(prices[i].dt.toString().substr(0,8)+' '+prices[i].dt.toString().substr(8,4)+'00').format());
+        data.push({date: date,
+                   prices: prices[i].price
+                 })  
+    }
+    return {data};
+};
+
 module.exports = mongoose.model('Ticker',TickerSchema);

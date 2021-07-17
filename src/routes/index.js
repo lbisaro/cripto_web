@@ -8,4 +8,8 @@ router.get('/', async (req,res) => {
     res.render('index',{});
 });
 
+router.get('/grafico', async (req,res) => {
+    res.render('graph/grafico',{});
+});
+
 module.exports = router;
